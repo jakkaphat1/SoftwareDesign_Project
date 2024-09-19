@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>รายการอาหาร</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>รายการอาหาร</h1>
+    <div>
+        <ul>
+            <li th:each="menu : ${menus}">
+                <div class="menu-item">
+                    <h2 th:text="${menu.name}">ชื่ออาหาร</h2>
+                    <p th:text="${menu.description}">รายละเอียด</p>
+                    <p>ราคา: <span th:text="${menu.price}"></span></p>
+                    <form th:action="@{/cart/add}" method="post">
+                        <input type="hidden" name="menuId" th:value="${menu.menuId}"/>
+                        <input type="number" name="quantity" value="1" min="1"/>
+                        <button type="submit">เพิ่มลงในตะกร้า</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <a href="/cart">ไปที่ตะกร้า</a>
+</body>
+</html>

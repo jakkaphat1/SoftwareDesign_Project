@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>จัดการอาหาร (Admin)</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>จัดการอาหาร (Admin)</h1>
+        <nav>
+            <a href="/admin/menu/add">เพิ่มอาหารใหม่</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>รายการอาหารที่เพิ่ม</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ชื่ออาหาร</th>
+                    <th>รายละเอียด</th>
+                    <th>ราคา</th>
+                    <th>การจัดการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="menu : ${menus}">
+                    <td th:text="${menu.name}">ชื่ออาหาร</td>
+                    <td th:text="${menu.description}">รายละเอียด</td>
+                    <!-- แก้ไขการแสดงผลราคา -->
+                    <td th:text="${menu.price}">ราคา</td>
+                    <td>
+                        <!-- ปุ่มแก้ไข -->
+                        <a th:href="@{/admin/menu/edit/{id}(id=${menu.menuId})}" class="button">แก้ไข</a>
+                        <!-- ฟอร์มลบ -->
+                        <form th:action="@{/admin/menu/delete}" method="post" style="display:inline;">
+                            <input type="hidden" name="menuId" th:value="${menu.menuId}"/>
+                            <button type="submit" class="button-delete">ลบ</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>

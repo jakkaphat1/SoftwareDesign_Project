@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ตะกร้าสินค้า</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>ตะกร้าสินค้า</h1>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ชื่ออาหาร</th>
+                    <th>จำนวน</th>
+                    <th>ราคา</th>
+                    <th>รวม</th>
+                    <th>การจัดการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cartItem : ${cartItems}">
+                    <td th:text="${cartItem.menu.name}"></td>
+                    <td th:text="${cartItem.quantity}"></td>
+                    <td th:text="${cartItem.menu.price}"></td>
+                    <td th:text="${cartItem.menu.price * cartItem.quantity}"></td>
+                    <td>
+                        <!-- ปุ่มลบรายการอาหาร -->
+                        <form th:action="@{/cart/remove}" method="post" style="display:inline;">
+                            <input type="hidden" name="menuId" th:value="${cartItem.menu.menuId}"/>
+                            <button type="submit">ลบ</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/order/confirm}" method="post">
+            <button type="submit">ยืนยันคำสั่งซื้อ</button>
+        </form>
+    </div>
+    <a href="/menu">กลับไปที่เมนู</a>
+</body>
+</html>
