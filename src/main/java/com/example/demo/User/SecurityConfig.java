@@ -26,23 +26,50 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
+//	@Bean
+//	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//
+//		http.csrf(c -> c.disable())
+//
+//				.authorizeHttpRequests(request -> request.requestMatchers("/admin-page").hasAuthority("ADMIN")
+//						.requestMatchers("/user-page").hasAuthority("USER").requestMatchers("/registration", "/css/register")
+//						.permitAll().anyRequest().authenticated())
+//
+//				.formLogin(form -> form.loginPage("/login").loginProcessingUrl("/login")
+//						.successHandler(userSuccessHandler).permitAll())
+//
+//				.logout(form -> form.invalidateHttpSession(true).clearAuthentication(true)
+//						.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
+//						.permitAll());
+//
+//		return http.build();
+//	}
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	    http
+	        .csrf(c -> c.disable())
+	        .authorizeHttpRequests(request -> request
+	            .requestMatchers("/admin-page").hasAuthority("ADMIN")
+	            .requestMatchers("/user-page").hasAuthority("USER")
+	            .requestMatchers("/registration", "/login", "/css/**", "/js/**", "/images/**").permitAll()
+	            .anyRequest().authenticated()
+	        )
+	        .formLogin(form -> form
+	            .loginPage("/login")
+	            .loginProcessingUrl("/login")
+	            .successHandler(userSuccessHandler)
+	            .permitAll()
+	        )
+	        .logout(form -> form
+	            .invalidateHttpSession(true)
+	            .clearAuthentication(true)
+	            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	            .logoutSuccessUrl("/login?logout")
+	            .permitAll()
+	        );
 
-		http.csrf(c -> c.disable())
-
-				.authorizeHttpRequests(request -> request.requestMatchers("/admin-page").hasAuthority("ADMIN")
-						.requestMatchers("/user-page").hasAuthority("USER").requestMatchers("/registration", "/css/register")
-						.permitAll().anyRequest().authenticated())
-
-				.formLogin(form -> form.loginPage("/login").loginProcessingUrl("/login")
-						.successHandler(userSuccessHandler).permitAll())
-
-				.logout(form -> form.invalidateHttpSession(true).clearAuthentication(true)
-						.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-						.permitAll());
-
-		return http.build();
+	    return http.build();
 	}
 	
 	@Autowired

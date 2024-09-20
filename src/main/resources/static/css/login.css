@@ -1,12 +1,16 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-image: url('https://i.pinimg.com/originals/83/a8/7f/83a87fad679449c6d463982ee446ef85.jpg'); 
+    background-size: cover; /* ทำให้รูปภาพครอบคลุมทั้งหน้า */
+    background-position: center; /* จัดรูปภาพให้อยู่ตรงกลาง */
+    background-repeat: no-repeat; /* ป้องกันไม่ให้รูปภาพซ้ำ */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
 }
+
 
 .container {
     background-color: #fff;

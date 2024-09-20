@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.User.EmpUserDatailsService;
 import com.example.demo.User.UserDetail;
@@ -30,11 +31,22 @@ public class UserController {
 		return "register";
 	}
 	
+//	@PostMapping("/registration")
+//	public String saveUser(@ModelAttribute("user") UserDto userDto,Model model) {
+//		userService.save(userDto);
+//		model.addAttribute("message","Registration Successfully");
+//		return "register";
+//	}
 	@PostMapping("/registration")
-	public String saveUser(@ModelAttribute("user") UserDto userDto,Model model) {
-		userService.save(userDto);
-		model.addAttribute("message","Registration Successfully");
-		return "register";
+	public String saveUser(@ModelAttribute("user") UserDto userDto, RedirectAttributes redirectAttributes) {
+	    try {
+	        userService.save(userDto);
+	        redirectAttributes.addFlashAttribute("message", "Registration Successfully");
+	        return "redirect:/login";  // Redirect ไปยังหน้า login
+	    } catch (Exception e) {
+	        redirectAttributes.addFlashAttribute("error", "Registration failed: " + e.getMessage());
+	        return "redirect:/registration";
+	    }
 	}
 	
 	@GetMapping("/login")
