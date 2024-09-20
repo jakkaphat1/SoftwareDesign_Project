@@ -26,18 +26,28 @@ public class UserServiceImpl implements UserService {
 //        return userRepository.save(user);
 //    }
     
+//    @Override
+//    public User save(UserDto userDto) {
+//        // กำหนดค่า role เป็น "USER" โดยอัตโนมัติ
+//        String role = "USER";
+//        
+//        // สร้าง object User จากข้อมูลใน UserDto โดยใช้ role ที่กำหนดไว้
+//        User user = new User(userDto.getEmail(), 
+//                             passwordEncoder.encode(userDto.getPassword()), 
+//                             role, 
+//                             userDto.getFullname());
+//        
+//        // บันทึกผู้ใช้ลงในฐานข้อมูลผ่าน UserRepository
+//        return userRepository.save(user);
+//    }
+    
     @Override
     public User save(UserDto userDto) {
-        // กำหนดค่า role เป็น "USER" โดยอัตโนมัติ
-        String role = "USER";
-        
-        // สร้าง object User จากข้อมูลใน UserDto โดยใช้ role ที่กำหนดไว้
         User user = new User(userDto.getEmail(), 
                              passwordEncoder.encode(userDto.getPassword()), 
-                             role, 
+                             userDto.getRole(), 
                              userDto.getFullname());
-        
-        // บันทึกผู้ใช้ลงในฐานข้อมูลผ่าน UserRepository
         return userRepository.save(user);
     }
+    
 }

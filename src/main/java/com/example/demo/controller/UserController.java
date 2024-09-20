@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +26,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/registration")
-	public String getRegistrationPage(Model model) {
-		model.addAttribute("user", new UserDto());
-		return "register";
-	}
+	@GetMapping("/admin/register")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String getRegistrationPage(Model model) {
+        model.addAttribute("user", new UserDto());
+        return "register";
+    }
 	
 //	@PostMapping("/registration")
 //	public String saveUser(@ModelAttribute("user") UserDto userDto,Model model) {
@@ -37,17 +39,30 @@ public class UserController {
 //		model.addAttribute("message","Registration Successfully");
 //		return "register";
 //	}
-	@PostMapping("/registration")
-	public String saveUser(@ModelAttribute("user") UserDto userDto, RedirectAttributes redirectAttributes) {
-	    try {
-	        userService.save(userDto);
-	        redirectAttributes.addFlashAttribute("message", "Registration Successfully");
-	        return "redirect:/login";  // Redirect ไปยังหน้า login
-	    } catch (Exception e) {
-	        redirectAttributes.addFlashAttribute("error", "Registration failed: " + e.getMessage());
-	        return "redirect:/registration";
-	    }
-	}
+//	@PostMapping("/registration")
+//	public String saveUser(@ModelAttribute("user") UserDto userDto, RedirectAttributes redirectAttributes) {
+//	    try {
+//	        userService.save(userDto);
+//	        redirectAttributes.addFlashAttribute("message", "Registration Successfully");
+//	        return "redirect:/login";  // Redirect ไปยังหน้า login
+//	    } catch (Exception e) {
+//	        redirectAttributes.addFlashAttribute("error", "Registration failed: " + e.getMessage());
+//	        return "redirect:/registration";
+//	    }
+//	}
+	
+	@PostMapping("/admin/register")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String registerUserByAdmin(@ModelAttribute("user") UserDto userDto, RedirectAttributes redirectAttributes) {
+        try {
+            userService.save(userDto);
+            redirectAttributes.addFlashAttribute("successMessage", "User registered successfully");
+            return "redirect:/admin-page";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Registration failed: " + e.getMessage());
+            return "redirect:/register";
+        }
+    }
 	
 	@GetMapping("/login")
 	public String getLoginPage(Model model) {
