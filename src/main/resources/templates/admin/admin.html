@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,9 @@
 <body>
     <header>
         <h1>หน้าแรกของผู้ดูแลระบบ (Admin)</h1>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout" class="btn-logout"/>
+        </form>
     </header>
 
     <main>
@@ -26,6 +29,47 @@
                 <p>มีคำสั่งซื้อใหม่เข้ามา!</p>
             </div>
         </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ร้านอาหารของเรา</p>
+    </footer>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>หน้าแรกของผู้ดูแลระบบ (Admin)</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>หน้าแรกของผู้ดูแลระบบ (Admin)</h1>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout" class="btn-logout"/>
+        </form>
+    </header>
+
+    <main>
+        <section>
+            <h2>การจัดการผู้ใช้</h2>
+            <nav>
+                <a href="/admin/register" class="btn-register">เพิ่มผู้ใช้ใหม่</a>
+                <!-- เพิ่มลิงก์อื่นๆ เกี่ยวกับการจัดการผู้ใช้ตามต้องการ -->
+            </nav>
+        </section>
+
+        <section>
+            <h2>การจัดการอาหาร</h2>
+            <nav>
+                <a href="/admin/menu">ดูรายการอาหาร</a>
+                <a href="/admin/menu/add">เพิ่มอาหารใหม่</a>
+            </nav>
+        </section>
+
+        <!-- ส่วนอื่นๆ ของหน้า admin ยังคงเหมือนเดิม -->
     </main>
 
     <footer>

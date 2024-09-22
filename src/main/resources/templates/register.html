@@ -13,11 +13,11 @@
         </div>
         <h2>Registration Form</h2>
         <form 
-         th:action="@{/registration}"
-         method="post"
-         role="form"
-         th:object="${user}"
-        >
+ th:action="@{/admin/register}"
+ method="post"
+ role="form"
+ th:object="${user}"
+>
             <div class="form-group">
                 <label for="fullname">Fullname:</label>
                 <input th:field="*{fullname}" type="text" id="fullname" name="fullname" placeholder="Enter your fullname" required>

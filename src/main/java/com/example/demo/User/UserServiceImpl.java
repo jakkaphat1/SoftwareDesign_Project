@@ -41,11 +41,20 @@ public class UserServiceImpl implements UserService {
 //        return userRepository.save(user);
 //    }
     
+//    @Override
+//    public User save(UserDto userDto) {
+//        User user = new User(userDto.getEmail(), 
+//                             passwordEncoder.encode(userDto.getPassword()), 
+//                             userDto.getRole(), 
+//                             userDto.getFullname());
+//        return userRepository.save(user);
+//    }
     @Override
     public User save(UserDto userDto) {
+        String role = userDto.getRole() != null ? userDto.getRole() : "USER"; // ใช้ role จาก userDto ถ้ามี ไม่งั้นใช้ "USER"
         User user = new User(userDto.getEmail(), 
                              passwordEncoder.encode(userDto.getPassword()), 
-                             userDto.getRole(), 
+                             role,  // ใช้ role ที่ตั้งค่าแล้ว
                              userDto.getFullname());
         return userRepository.save(user);
     }

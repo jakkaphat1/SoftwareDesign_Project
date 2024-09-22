@@ -26,12 +26,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/admin/register")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String getRegistrationPage(Model model) {
-        model.addAttribute("user", new UserDto());
-        return "register";
-    }
+	
 	
 //	@PostMapping("/registration")
 //	public String saveUser(@ModelAttribute("user") UserDto userDto,Model model) {
@@ -51,16 +46,26 @@ public class UserController {
 //	    }
 //	}
 	
+	@GetMapping("/admin/register")
+//    @PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
+    public String getRegistrationPage(Model model) {
+        model.addAttribute("user", new UserDto());
+        return "register";
+    }
+	
+
 	@PostMapping("/admin/register")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String registerUserByAdmin(@ModelAttribute("user") UserDto userDto, RedirectAttributes redirectAttributes) {
         try {
             userService.save(userDto);
             redirectAttributes.addFlashAttribute("successMessage", "User registered successfully");
-            return "redirect:/admin-page";
+            return "redirect:/login";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Registration failed: " + e.getMessage());
-            return "redirect:/register";
+            return "redirect:/admin/register";
+
         }
     }
 	
