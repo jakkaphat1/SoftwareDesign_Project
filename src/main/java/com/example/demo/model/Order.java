@@ -16,6 +16,10 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @ManyToOne
+    @JoinColumn(name = "table_id")
+    private TableCustomer tableCustomer;
+
     private LocalDateTime orderDate;
     private double totalAmount;
 
@@ -37,6 +41,14 @@ public class Order {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public TableCustomer getTableCustomer() {
+        return tableCustomer;
+    }
+
+    public void setTableCustomer(TableCustomer tableCustomer) {
+        this.tableCustomer = tableCustomer;
     }
 
     public LocalDateTime getOrderDate() {

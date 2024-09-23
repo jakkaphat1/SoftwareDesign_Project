@@ -41,8 +41,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>หน้าแรกของผู้ดูแลระบบ (Admin)</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .btn-logout {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn-logout:hover {
+            background-color: #c82333;
+        }
+        main {
+            margin: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            color: #007bff;
+        }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #343a40;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -56,7 +113,7 @@
         <section>
             <h2>การจัดการผู้ใช้</h2>
             <nav>
-                <a href="/admin/register" class="btn-register">เพิ่มผู้ใช้ใหม่</a>
+                <a href="/admin/register" class="btn btn-primary">เพิ่มผู้ใช้ใหม่</a>
                 <!-- เพิ่มลิงก์อื่นๆ เกี่ยวกับการจัดการผู้ใช้ตามต้องการ -->
             </nav>
         </section>
@@ -64,8 +121,15 @@
         <section>
             <h2>การจัดการอาหาร</h2>
             <nav>
-                <a href="/admin/menu">ดูรายการอาหาร</a>
-                <a href="/admin/menu/add">เพิ่มอาหารใหม่</a>
+                <a href="/admin/menu" class="btn btn-info">ดูรายการอาหาร</a>
+                <a href="/admin/menu/add" class="btn btn-success">เพิ่มอาหารใหม่</a>
+            </nav>
+        </section>
+        
+        <section>
+            <h2>การจัดการโต๊ะอาหาร</h2>
+            <nav>
+                <a href="/admin/tables" class="btn btn-info">ดูรายการโต๊ะ</a>
             </nav>
         </section>
 
@@ -75,5 +139,10 @@
     <footer>
         <p>&copy; 2024 ร้านอาหารของเรา</p>
     </footer>
+
+    <!-- Bootstrap JS and dependencies	 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

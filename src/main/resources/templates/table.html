@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .table-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .table {
+            background-color: #6c757d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .table.available {
+            background-color: #28a745;
+        }
+        .table.occupied {
+            background-color: #dc3545;
+            cursor: not-allowed;
+        }
+        .table:hover {
+            background-color: #218838;
+        }
+        .create-table-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .create-table-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-grid">
+        <div class="table available">Table 1</div>
+    </div>
+
+    <!-- ปุ่มสร้างโต๊ะใหม่ -->
+    <button class="create-table-btn" onclick="createNewTable()">สร้างโต๊ะใหม่</button>
+
+    <script>
+        function createNewTable() {
+            const tableGrid = document.querySelector('.table-grid');
+            const newTableNumber = tableGrid.children.length + 1;
+            const newTable = document.createElement('div');
+            newTable.classList.add('table', 'available');
+            newTable.textContent = `Table ${newTableNumber}`;
+            tableGrid.appendChild(newTable);
+        }
+    </script>
+</body>
+</html>

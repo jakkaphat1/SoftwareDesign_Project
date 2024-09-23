@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>เพิ่มโต๊ะ (Admin)</title>
+</head>
+<body>
+    <header>
+        <h1>เพิ่มโต๊ะ (Admin)</h1>
+    </header>
+    <main>
+        <form th:action="@{/admin/tables/add}" method="post">
+            <div>
+                <label for="tableNumber">หมายเลขโต๊ะ :</label>
+                <input type="text" id="tableNumber" name="tableNumber" required />
+            </div>
+           <!-- <div>
+              <label for="status">สถานะ:</label>
+                <select id="status" name="status">
+                    <option value="false">ว่าง</option>
+                    <option value="true">ไม่ว่าง</option>
+                </select>-->
+            </div>
+            <button type="submit">เพิ่มโต๊ะ</button>
+            <button class="back-button" onclick="window.location.href='/admin/tables';">กลับไปยังหน้าจัดการโต๊ะ</button>
+        </form>
+    </main>
+</body>
+</html>

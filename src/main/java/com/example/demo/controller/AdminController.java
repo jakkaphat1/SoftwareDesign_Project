@@ -71,4 +71,9 @@ public class AdminController {
         menuService.deleteMenu(menuId);
         return "redirect:/admin/menu";
     }
+    
+//    @GetMapping("/tables")
+//    public String showTablePage() {
+//        return "admin/tablecustomer"; // ชี้ไปที่ admin/tablecustomer.html
+//    }
 }

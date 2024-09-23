@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>แก้ไขโต๊ะ (Admin)</title>
+</head>
+<body>
+    <header>
+        <h1>แก้ไขโต๊ะ (Admin)</h1>
+    </header>
+    <main>
+        <!-- ฟอร์มสำหรับการแก้ไขโต๊ะ ใช้ข้อมูลที่มีอยู่เพื่อเติมลงในฟอร์ม -->
+        <form th:action="@{/admin/tables/edit/{id}(id=${tableCustomer.id})}" method="post">
+            <div>
+                <label for="tableNumber">หมายเลขโต๊ะ:</label>
+                <input type="text" id="tableNumber" name="tableNumber" th:value="${tableCustomer.tableNumber}" required />
+            </div>
+            <button type="submit">บันทึกการแก้ไข</button>
+            <button class="back-button" onclick="window.location.href='/admin/table';">กลับไปยังหน้าจัดการโต๊ะ</button>
+        </form>
+    </main>
+</body>
+</html>
